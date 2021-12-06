@@ -1,4 +1,4 @@
-var dburl = "http://localhost:5555";
+var dburl = "http://osprey2.towson.edu:5432";
 var currentTable;
 (function ($) {
     "use strict";
