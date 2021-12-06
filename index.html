@@ -15,9 +15,8 @@
     <script src="assets/js/main.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    
-	<base href="https://spmnj.dev/cosc457project/">
-	
+    <base href="https://spmnj.dev/cosc457project/">
+
 </head>
 
 <body id="page-top">
@@ -33,7 +32,9 @@
                     <li class="nav-item"><a class="nav-link active" href="index.html"><i
                                 class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i><span>About Us</span></a></li>
+                        <a class="nav-link" href="https://en.wikipedia.org/wiki/Phi_Kappa_Psi"><i
+                                class="fas fa-info-circle"></i><span>About Us</span></a>
+                    </li>
                     </li>
                     <li id="chapter-links" class="nav-item">
                         <div><a class="btn btn-link nav-link" data-bs-toggle="collapse" aria-expanded="true"
@@ -51,8 +52,8 @@
                         </div>
                     </li>
                     <li id="no-chapter-selected" class="nav-item">
-                        <div><a class="btn btn-link nav-link" role="button"><i
-                                class="fas fa-cog"></i>&nbsp;<span>No Chapter Selected</span></a>
+                        <div><a class="btn btn-link nav-link" role="button"><i class="fas fa-cog"></i>&nbsp;<span>No
+                                    Chapter Selected</span></a>
                         </div>
                     </li>
                     <script type="text/javascript">
@@ -149,7 +150,7 @@
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1">
                                                 <span>CHAPTERS</span>
                                             </div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="chapters">0</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-home fa-2x text-gray-300"></i></div>
                                     </div>
@@ -181,13 +182,13 @@
                                                     MEMBERS</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>85%</span></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm">
                                                         <div class="progress-bar bg-info" aria-valuenow="50"
                                                             aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                                                            <span class="visually-hidden">50%</span>
+                                                            <span class="visually-hidden">85%</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -206,7 +207,7 @@
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>ALL
                                                     MEMBERS</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="members">0</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i>
                                         </div>
@@ -214,6 +215,24 @@
                                 </div>
                             </div>
                         </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $.ajax({
+                                    url: dburl + "/chapters",
+                                    type: "GET",
+                                    success: function (data) {
+                                        var chapters = 0;
+                                        var members = 0;
+                                        data.forEach(function (chapter) {
+                                            chapters++;
+                                            members += chapter.chapterMembers;
+                                        });
+                                        $("#chapters").text(chapters);
+                                        $("#members").text(members);
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                     <div class="row">
                         <div class="col">
