@@ -563,7 +563,7 @@ function buildInvoiceDataTable() {
                     title: "Description",
                 },
                 {
-                    data: "Amount",
+                    data: "amount",
                     title: "Amount",
                 }
                 ]
